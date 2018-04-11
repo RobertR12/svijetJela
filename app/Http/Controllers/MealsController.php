@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Meal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MealsController extends Controller
 {
@@ -12,9 +13,68 @@ class MealsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $para = $request->all();
+
+        $language_id = isset($para['language_id']) ? $para['language_id'] : 3;
+
+        $meals = Meal::where('language_id', $language_id);
+
+        //dd($meals);
+
+        if($request->has('id')) {
+
+            $meals->where('id', $request->input('id'))->get();
+
+        }
+
+
+        if (isset($para['category'])) {
+
+            if (is_numeric($para['category'])) {
+
+                $meals->where('category_id', $para['category']);
+            } elseif ($para['category'] == 'NULL') {
+
+                $meals->whereNull('category_id');
+            } elseif ($para['category'] == '!NULL') {
+
+                $meals->whereNotNull('category_id');
+            }
+        }
+
+       /* if (isset($params['with']))[
+
+
+        ]*/
+
+
+
+        $meals = $meals->get();
+        return response()->json([
+
+            'data' => $meals,
+
+        ]);
+
+
+
+
+
+
+
+       /* $meals = Meal::all();
+
+        dd($meals);
+
+        // return view and pass in the above variable
+
+        return view('user.index')->with('users', $users);*/
+
+
+
+
     }
 
     /**
@@ -44,9 +104,10 @@ class MealsController extends Controller
      * @param  \App\Meal  $meal
      * @return \Illuminate\Http\Response
      */
-    public function show(Meal $meal)
+    public function show(Request $request)
     {
-        //
+
+
     }
 
     /**
