@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('meals','MealsController');
+Route::resource('tags','TagsController');
+Route::resource('ingredients','IngredientsController');
+Route::resource('categories','CategoriesController');
+Route::resource('languages','LanguagesController');
