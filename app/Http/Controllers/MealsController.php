@@ -5,7 +5,6 @@ use App\Http\Controllers\Controller;
 
 use App\Meal;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MealsController extends Controller
@@ -20,9 +19,7 @@ class MealsController extends Controller
     public function index(Request $request)
     {
         $para = $request->all();
-
         $language_id = isset($para['lang']) ? $para['lang'] : 3;
-
         $meals = Meal::where('language_id', $language_id);
 
         //dd($meals);
@@ -30,18 +27,10 @@ class MealsController extends Controller
         if($request->has('id')) {
 
             $meals->where('id', $request->input('id'));
-
         }
 
-
-
-
         $ppage = isset($para['per_page']) ? $para['per_page'] : 5 ;
-
         $meals = $meals->paginate($ppage);
-
-
-
 
         if (isset($para['category'])) {
 
@@ -60,7 +49,6 @@ class MealsController extends Controller
         if(isset($para['tags'])) {
 
             $tag=explode(',', $para['tags']);
-
             $meals->join('meal_tag', 'meals.id', '=', 'meal_tag.meal_id');
             $meals->wherein('meal_tag.tag_id', $tag);
         }
@@ -68,7 +56,6 @@ class MealsController extends Controller
         if(isset($para['with'])) {
 
             $kljucne = explode(',', $para['with']);
-
             $keywords = array('category', 'ingredient', 'tag');
 
             foreach ($kljucne as $x) {
@@ -79,7 +66,6 @@ class MealsController extends Controller
                 }
             }
         }
-
         if(isset($para['diff_time'])) {
 
             $time=$para['diff_time'];
@@ -87,33 +73,11 @@ class MealsController extends Controller
             $meals->where('updated_at','>', $time)->withTrashed();
         }
 
-
-
-
         $meals = $meals->get();
         return response()->json([
 
             'data' => $meals,
-
         ]);
-
-
-
-
-
-
-
-       /* $meals = Meal::all();
-
-        dd($meals);
-
-        // return view and pass in the above variable
-
-        return view('user.index')->with('users', $users);*/
-
-
-
-
     }
 
     /**
@@ -145,8 +109,7 @@ class MealsController extends Controller
      */
     public function show(Request $request)
     {
-
-
+        //
     }
 
     /**
