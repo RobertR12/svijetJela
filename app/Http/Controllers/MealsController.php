@@ -82,7 +82,7 @@ class MealsController extends Controller
                     ->orWhere('deleted_at','>', $time)->withTrashed();
             }else{
                 $meals->where('updated_at','>', $time);
-        }
+            }
         }
 
         $meals = $meals->get();
