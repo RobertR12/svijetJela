@@ -29,8 +29,13 @@ class MealsController extends Controller
             $meals->where('id', $request->input('id'));
         }
 
-        $ppage = isset($para['per_page']) ? $para['per_page'] : 5 ;
-        $meals = $meals->paginate($ppage);
+        /*$ppage = isset($para['per_page']) ? $para['per_page'] : 5 ;
+        $meals = $meals->paginate($ppage);*/
+
+        if(isset($para['per_page'])) {
+
+            $meals->paginate($para['per_page']);
+        }
 
         if (isset($para['category'])) {
 
