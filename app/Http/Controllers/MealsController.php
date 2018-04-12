@@ -75,7 +75,14 @@ class MealsController extends Controller
 
             $time=$para['diff_time'];
 
-            $meals->where('updated_at','>', $time)->withTrashed();
+            if( is_int($para['diff_time'] > 0)){
+
+                $meals->where('updated_at','>', $time)
+                    ->orWhere('created_at','>', $time)
+                    ->orWhere('deleted_at','>', $time)->withTrashed();
+            }else{
+                $meals->where('updated_at','>', $time);
+        }
         }
 
         $meals = $meals->get();
