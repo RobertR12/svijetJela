@@ -12,9 +12,12 @@ class MealsController extends Controller
 {
 
     private $meals;
+
     public function __construct(mealsInterface $meals) {
 
         $this->meals = $meals;
+
+
 
         //dd("nesto");
        //dd( $this->meals);
@@ -29,16 +32,22 @@ class MealsController extends Controller
      */
     public function index(Request $request)
     {
+        $para = $request->all();
+        //dd($request);
+        $meals =$this->meals->selectAll($request);
 
+        //dd($meals);
 
-        $meals = $this->meals->selectAll($request);
-        //$meals = $this->meals->setLang($request);
+        //nz kak da primjenim setLang funkciju nad $meals
+        //$meals = $meals->setLang($request);
+
 
 
 
         return response()->json([
 
-            'data' => $meals,
+            'data' => $meals
+
         ]);
 
 

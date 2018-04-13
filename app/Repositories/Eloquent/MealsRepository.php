@@ -16,19 +16,20 @@
 
       use SoftDeletes;
 
-      public function selectAll($request) {
+
+
+       public function selectAll($request) {
 
           $request = $request->all();
 
           $meals = Meal::all();
-
 
           return $meals;
 
       }
 
 
-      public function setLang($request) {
+      public function setLang($meals) {
 
           $language_id = isset($request['lang']) ? $request['lang'] : 3;
           $meals = Meal::where('language_id', $language_id);
