@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class MealsController extends Controller
 {
 
+    private $meals;
     public function __construct(mealsInterface $meals) {
 
         $this->meals = $meals;
@@ -31,7 +32,8 @@ class MealsController extends Controller
 
 
         $meals = $this->meals->selectAll($request);
-        //$meals = $meals->setLang($request);
+        //$meals = $this->meals->setLang($request);
+
 
 
         return response()->json([
