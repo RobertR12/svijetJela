@@ -38,8 +38,9 @@ class MealsController extends Controller
 
         //dd($meals);
 
-        //nz kak da primjenim setLang funkciju nad $meals
-        //$meals = $meals->setLang($request);
+        //nz kak da primjenim setLang funkciju nad $meals i tako na dalje znači da se poziva svaka funkcija
+        //iz repo kako bi se provjerilo jel postoji query uvijet i da se nadodaju uvijeti
+        //        //$meals = $meals->setLang($request);
 
 
 
