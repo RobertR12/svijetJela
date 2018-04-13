@@ -4,11 +4,20 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 
 use App\Meal;
+use App\Contracts\mealsInterface;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MealsController extends Controller
 {
+
+    public function __construct(mealsInterface $meals) {
+
+        $this->meals= $meals;
+
+        //dd("nesto");
+        dd( $this->meals);
+    }
 
     use SoftDeletes;
     /**
@@ -18,19 +27,9 @@ class MealsController extends Controller
      */
     public function index(Request $request)
     {
-        $para = $request->all();
-        $language_id = isset($para['lang']) ? $para['lang'] : 3;
-        $meals = Meal::where('language_id', $language_id);
 
-        //dd($meals);
 
-        if($request->has('id')) {
-
-            $meals->where('id', $request->input('id'));
-        }
-
-        /*$ppage = isset($para['per_page']) ? $para['per_page'] : 5 ;
-        $meals = $meals->paginate($ppage);*/
+        $para = $this->meal->selectAll($request);
 
         if(isset($para['per_page'])) {
 
