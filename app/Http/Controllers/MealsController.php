@@ -49,66 +49,6 @@ class MealsController extends Controller
             'data' => $meals
 
         ]);
-
-
-        /*if(isset($para['per_page'])) {
-
-            $meals->paginate($para['per_page']);
-        }
-
-        if (isset($para['category'])) {
-
-            if (is_numeric($para['category'])) {
-
-                $meals->where('category_id', $para['category']);
-            } elseif ($para['category'] == 'NULL') {
-
-                $meals->whereNull('category_id');
-            } elseif ($para['category'] == '!NULL') {
-
-                $meals->whereNotNull('category_id');
-            }
-        }
-
-        if(isset($para['tags'])) {
-
-            $tag=explode(',', $para['tags']);
-            $meals->join('meal_tag', 'meals.id', '=', 'meal_tag.meal_id');
-            $meals->wherein('meal_tag.tag_id', $tag);
-        }
-
-        if(isset($para['with'])) {
-
-            $kljucne = explode(',', $para['with']);
-            $keywords = array('category', 'ingredient', 'tag');
-
-            foreach ($kljucne as $x) {
-
-                if (in_array($x, $keywords, true)) {
-
-                    $meals->with($x);
-                }
-            }
-        }
-        if(isset($para['diff_time'])) {
-
-            $time=$para['diff_time'];
-
-            if( is_int($para['diff_time'] > 0)){
-
-                $meals->where('updated_at','>', $time)
-                    ->orWhere('created_at','>', $time)
-                    ->orWhere('deleted_at','>', $time)->withTrashed();
-            }else{
-                $meals->where('updated_at','>', $time);
-            }
-        }
-
-        $meals = $meals->get();
-        return response()->json([
-
-            'data' => $meals,
-        ]);*/
     }
 
     /**
