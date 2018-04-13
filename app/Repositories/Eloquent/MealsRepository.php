@@ -2,7 +2,7 @@
 
     namespace App\Repositories\Eloquent;
 
-    use app\Meal;
+    use App\Meal;
 
 
     use App\Contracts\mealsInterface;
@@ -19,10 +19,14 @@
       public function selectAll($request) {
 
           $request = $request->all();
+
           $meals = Meal::all();
 
-          return $request->with($meals);
+
+          return $meals;
+
       }
+
 
       public function setLang($request) {
 

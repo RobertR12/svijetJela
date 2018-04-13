@@ -13,10 +13,11 @@ class MealsController extends Controller
 
     public function __construct(mealsInterface $meals) {
 
-        $this->meals= $meals;
+        $this->meals = $meals;
 
         //dd("nesto");
-        dd( $this->meals);
+       //dd( $this->meals);
+        return $meals;
     }
 
     use SoftDeletes;
@@ -29,9 +30,17 @@ class MealsController extends Controller
     {
 
 
-        $para = $this->meal->selectAll($request);
+        $meals = $this->meals->selectAll($request);
+        //$meals = $meals->setLang($request);
 
-        if(isset($para['per_page'])) {
+
+        return response()->json([
+
+            'data' => $meals,
+        ]);
+
+
+        /*if(isset($para['per_page'])) {
 
             $meals->paginate($para['per_page']);
         }
@@ -88,7 +97,7 @@ class MealsController extends Controller
         return response()->json([
 
             'data' => $meals,
-        ]);
+        ]);*/
     }
 
     /**
