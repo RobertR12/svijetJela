@@ -29,7 +29,7 @@
       }
 
 
-      public function setLang($meals) {
+      public function setLang( $request) {
 
           $language_id = isset($request['lang']) ? $request['lang'] : 3;
           $meals = Meal::where('language_id', $language_id);

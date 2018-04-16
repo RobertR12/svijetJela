@@ -35,12 +35,16 @@ class MealsController extends Controller
         $para = $request->all();
         //dd($request);
         $meals =$this->meals->selectAll($request);
+        //$this->meals->setLang($meals, $request);
+        //$meals = $this->meals->setLang($request->input('lang'));
+
+        //dd($meals2);
 
         //dd($meals);
 
-        //nz kak da primjenim setLang funkciju nad $meals i tako na dalje znači da se poziva svaka funkcija
+        //nz kak da primjenim setLang funkciju nad $meals i tako da  se poziva svaka funkcija
         //iz repo kako bi se provjerilo jel postoji query uvijet i da se nadodaju uvijeti
-        //        //$meals = $meals->setLang($request);
+        //$meals = $meals->setLang($request);
 
 
 
