@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Meal;
 use App\Contracts\mealsInterface;
+use App\Repositories\Eloquent\MealsRepository;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -12,10 +13,11 @@ class MealsController extends Controller
 {
 
     private $meals;
+    public $para;
 
-    public function __construct(mealsInterface $meals) {
+    public function __construct(MealsRepository $meals) {
 
-        $this->meals = $meals;
+        $this->meal = $meals;
 
 
 
@@ -33,8 +35,34 @@ class MealsController extends Controller
     public function index(Request $request)
     {
         $para = $request->all();
+
+        $meals = $this->meal->selectAll();
+        $meals1 = $this->meal->setLang();
+        //$this->meal->setLang($request->has('lang'));
+        //dd($meals);
+        //$this->meals->setLang();
+
+
+        //$meals = $this->meals;
+
+        /*public function getAllMeals() {
+
+            return $this->meals->selectAll();
+    }
+        public function getById () {
+
+            return $this->meals->checkId($para[])
+    }*/
+
+
+
+        //staro
+        /*$para = $request->all();
         //dd($request);
         $meals =$this->meals->selectAll($request);
+
+        $this->meals->setLang($request['language_id']);
+
         //$this->meals->setLang($meals, $request);
         //$meals = $this->meals->setLang($request->input('lang'));
 
@@ -44,14 +72,17 @@ class MealsController extends Controller
 
         //nz kak da primjenim setLang funkciju nad $meals i tako da  se poziva svaka funkcija
         //iz repo kako bi se provjerilo jel postoji query uvijet i da se nadodaju uvijeti
-        //$meals = $meals->setLang($request);
+        //$meals = $meals->setLang($request);*/
+
+        //endStaro
 
 
 
 
         return response()->json([
 
-            'data' => $meals
+            'data' => $meals,
+            'data2' => $meals1,
 
         ]);
     }
