@@ -179,6 +179,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         JeroenNoten\LaravelAdminLte\ServiceProvider::class,
         Unlu\Laravel\Api\ApiQueryBuilderServiceProvider::class,
+        App\Providers\RepositoryServiceProvider::class,
 
     ],
 
